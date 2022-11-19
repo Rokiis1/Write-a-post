@@ -4,11 +4,19 @@ import { Link } from "react-router-dom";
 import { useGetPosts } from "../hooks/useGetPosts";
 import { FetchState } from "../interfaces/States";
 import { deletePost } from "../middleware/libraries/deletePost";
+import { createPost } from "../middleware/libraries/createPost";
 import "../styles/PostPage.css";
 
 const PostsPage = () => {
   const [title, setTitle] = useState("");
   const [fetchState, posts, setPosts, getAllPosts] = useGetPosts();
+
+  const handleCreatePost = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const post = await createPost(title);
+    setPosts([...posts, post]);
+    setTitle("");
+  };
 
   const handleDeletePost = async (postId: string) => {
     await deletePost(postId);
@@ -20,12 +28,12 @@ const PostsPage = () => {
   }, []);
 
   return (
-    <div className="container">
-      <div className="PostsPage">
+    <div>
+      <div>
         <h1>Your posts</h1>
         {fetchState === FetchState.LOADING && <p>Fetching posts...</p>}
         {fetchState === FetchState.ERROR && (
-          <ul className="post">
+          <ul>
             {posts.map((post) => (
               <li key={post._id}>
                 <button onClick={() => handleDeletePost(post._id)}>X</button>
@@ -35,7 +43,7 @@ const PostsPage = () => {
           </ul>
         )}
         {fetchState === FetchState.SUCCESS && (
-          <ul className="post">
+          <ul>
             {posts.map((post) => (
               <li key={post._id}>
                 <button onClick={() => handleDeletePost(post._id)}>X</button>
@@ -44,8 +52,9 @@ const PostsPage = () => {
             ))}
           </ul>
         )}
-        <form>
-          <label htmlFor="post-title">Post title</label>
+        {/*  */}
+        <form onSubmit={handleCreatePost}>
+          <label>Post title</label>
           <input
             id="post-title"
             value={title}
