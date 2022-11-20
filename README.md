@@ -20,8 +20,8 @@ You can create post with functions like create, delete.
 
 # API Reference
 
-[API for this project](https://notes-card.onrender.com)
-[API github link](https://github.com/Rokiis1/card-api-server)
+[API for this project](https://notes-card.onrender.com),
+ [API github link](https://github.com/Rokiis1/card-api-server)
 
 #### Get all posts
 
