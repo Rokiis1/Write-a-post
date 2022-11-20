@@ -21,54 +21,59 @@ You can create post with functions like create, delete.
 # API Reference
 
 [API for this project](https://notes-card.onrender.com)
+[API github link](https://github.com/Rokiis1/card-api-server)
 
-#### Get home page videos
+#### Get all posts
 
 ```http
-  GET /search?maxResults=20&q=""&key=${API_KEY}&part=snippet&type=video&${
-        isNext ? `pageToken=${nextPageTokenFromState}
+  GET /posts
 ```
 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
-| `isNext`  | `string` | **Required**. isNext  |
-| `pageToken` | `boolean`| **Required**. next Page Token |
-
-#### Get recommended videos 
+#### Get post
 
 ```http
-  GET /activities?key=${API_KEY}&channelId=${channelId}&part=snippet,
-  contentDetails&maxResults=20&type=video&videoId=${videoId}
+  GET /posts/:postId
 ```
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
-| `channelId`| `number`| **Required**. channelId |
-| `videoId`| `string`  | **Required**. videoId |
+| `postId`| `string`| **Required**. postId |
 
-#### Get search page videos
+#### Create new post
 
 ```http
-  GET videos?key=${API_KEY}&part=snippet,statistics&type=video&id=${id}
+  POST /posts
+```
+#### Delete post
+
+```http
+  DELETE /posts/:postId
 ```
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
-| `id`| `string`| **Required**. id |
+| `postId` | `string` | **Required**. postId |
 
-#### Get channel
+#### Create Post card
 
 ```http
-  GET /channels?part=snippet,statistics&id=${item.snippet.channelId}&key=${API_KEY}
+  POST /posts/:postId/cards
 ```
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
-| `channelId`| `string`| **Required**. channelId |
+| `postId` | `string` | **Required**. postId |
+
+#### Delete post card
+
+```http
+  DELETE /posts/:postId/cards/:cardId
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `postId` | `string` | **Required**. postId |
+| `cardId` |  `string`|  **Required**. cardId |
 
 # Run Locally
 
