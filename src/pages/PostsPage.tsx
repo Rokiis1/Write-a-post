@@ -5,7 +5,7 @@ import { FetchState } from "../interfaces/States";
 import { deletePost } from "../middleware/libraries/deletePost";
 import { createPost } from "../middleware/libraries/createPost";
 import "../styles/PostPage.css";
-import PostCard from "../components/PostCard";
+import PostCards from "../components/PostsCard";
 
 const PostsPage = () => {
   const [title, setTitle] = useState<string>("");
@@ -35,7 +35,7 @@ const PostsPage = () => {
         {fetchState === FetchState.ERROR && (
           <ul>
             {posts.map((post) => (
-              <PostCard
+              <PostCards
                 key={post._id}
                 post={post}
                 handleDeletePost={handleDeletePost}
@@ -46,7 +46,7 @@ const PostsPage = () => {
         {fetchState === FetchState.SUCCESS && (
           <ul>
             {posts.map((post) => (
-              <PostCard
+              <PostCards
                 key={post._id}
                 post={post}
                 handleDeletePost={handleDeletePost}

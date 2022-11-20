@@ -35,12 +35,17 @@ const PostCard = () => {
     fetchPost();
   }, [postId]);
 
-  console.log(cards);
-  console.log(post);
-
   return (
     <div>
       <h1>{post?.title}</h1>
+      <ul className="cards">
+        {cards.map((card, cardId) => (
+          <li key={cardId}>
+            <button onClick={() => handleDeleteCard(cardId)}>X</button>
+            {card}
+          </li>
+        ))}
+      </ul>
       <form onSubmit={handleCreateDeck}>
         <label htmlFor="card-text">Card Text</label>
         <input

@@ -8,7 +8,7 @@ type Props = {
   handleDeletePost: (postId: string) => Promise<void>;
 };
 
-const PostCard = ({ post, handleDeletePost }: Props) => {
+const PostCards = ({ post, handleDeletePost }: Props) => {
   return (
     <>
       <li>
@@ -25,4 +25,4 @@ const PostCard = ({ post, handleDeletePost }: Props) => {
   );
 };
 
-export default PostCard;
+export default PostCards;
