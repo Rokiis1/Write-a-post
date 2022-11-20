@@ -5,6 +5,7 @@ import { Post } from "../interfaces/Post";
 import createPostCard from "../middleware/libraries/createPostCard";
 import deletePostCard from "../middleware/libraries/deletePostCard";
 import getPost from "../middleware/libraries/getPost";
+import "../styles/Card.css";
 
 const PostCard = () => {
   const [post, setPost] = useState<Post | undefined>();
@@ -12,7 +13,7 @@ const PostCard = () => {
   const [text, setText] = useState("");
   const { postId } = useParams();
 
-  async function handleCreateDeck(e: React.FormEvent) {
+  async function handleCreatePost(e: React.FormEvent) {
     e.preventDefault();
     const { cards: serverCards } = await createPostCard(postId!, text);
     setCards(serverCards);
@@ -36,26 +37,37 @@ const PostCard = () => {
   }, [postId]);
 
   return (
-    <div>
-      <h1>{post?.title}</h1>
-      <ul className="cards">
+    <div className="PostPage-Conatiner">
+      <h1 className="PostsPage-h1">{post?.title}</h1>
+
+      <ul className="PostsPage-Card">
         {cards.map((card, cardId) => (
-          <li key={cardId}>
-            <button onClick={() => handleDeleteCard(cardId)}>X</button>
+          <li className="PostsPage-Card-Content" key={cardId}>
             {card}
+            <button
+              PostsPage-Card-button
+              onClick={() => handleDeleteCard(cardId)}
+            >
+              X
+            </button>
           </li>
         ))}
       </ul>
-      <form onSubmit={handleCreateDeck}>
-        <label htmlFor="card-text">Card Text</label>
+
+      <form className="Form-Group" onSubmit={handleCreatePost}>
+        <label className="Form-Label" htmlFor="card-text">
+          Card Text
+        </label>
         <input
+          type="text"
           id="card-text"
+          className="Form-Field"
           value={text}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setText(e.target.value);
           }}
         />
-        <button>Create Card</button>
+        <button className="Form-Group-Button">Create Card</button>
       </form>
     </div>
   );

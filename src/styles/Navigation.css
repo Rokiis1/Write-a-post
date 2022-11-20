@@ -1,0 +1,18 @@
+.Navigation {
+  background-color: rgb(48, 49, 52);
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Navigation-Link {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+.Navigation-Link:hover {
+  color: #afadad;
+  transition: 1s;
+}

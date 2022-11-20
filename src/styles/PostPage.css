@@ -1,44 +1,16 @@
-/* .App {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.PostPage-Conatiner {
+  background-color: #202124;
+  height: 100vmax;
 }
 
-.PostPage form {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-}
-
-.PostPage h1 {
-  font-size: 32px;
-  text-align: center;
-}
-
-.post {
+.PostsPage-Card {
   display: grid;
-  width: 600px;
-  margin: 0 auto;
-  grid-gap: 10px;
-  grid-template-columns: repeat(3, 1fr);
-  color: black;
+  gap: 10px;
+  padding: 1rem;
 }
 
-.post li {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 120px;
-  background: white;
-  border: 1px solid white;
-  border-radius: 10px;
+.PostsPage-h1 {
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
 }
-
-.post li button {
-  position: absolute;
-  font-size: 10px;
-  top: 5px;
-  right: 5px;
-} */
