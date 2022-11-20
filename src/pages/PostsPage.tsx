@@ -1,14 +1,14 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useGetPosts } from "../hooks/useGetPosts";
 import { FetchState } from "../interfaces/States";
 import { deletePost } from "../middleware/libraries/deletePost";
 import { createPost } from "../middleware/libraries/createPost";
 import "../styles/PostPage.css";
+import PostCard from "../components/PostCard";
 
 const PostsPage = () => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState<string>("");
   const [fetchState, posts, setPosts, getAllPosts] = useGetPosts();
 
   const handleCreatePost = async (e: React.FormEvent) => {
@@ -35,26 +35,27 @@ const PostsPage = () => {
         {fetchState === FetchState.ERROR && (
           <ul>
             {posts.map((post) => (
-              <li key={post._id}>
-                <button onClick={() => handleDeletePost(post._id)}>X</button>
-                <Link to={`post/${post._id}`}>{post.title}</Link>
-              </li>
+              <PostCard
+                key={post._id}
+                post={post}
+                handleDeletePost={handleDeletePost}
+              />
             ))}
           </ul>
         )}
         {fetchState === FetchState.SUCCESS && (
           <ul>
             {posts.map((post) => (
-              <li key={post._id}>
-                <button onClick={() => handleDeletePost(post._id)}>X</button>
-                <Link to={`post/${post._id}`}>{post.title}</Link>
-              </li>
+              <PostCard
+                key={post._id}
+                post={post}
+                handleDeletePost={handleDeletePost}
+              />
             ))}
           </ul>
         )}
-        {/*  */}
         <form onSubmit={handleCreatePost}>
-          <label>Post title</label>
+          <label htmlFor="post-title">Post title</label>
           <input
             id="post-title"
             value={title}

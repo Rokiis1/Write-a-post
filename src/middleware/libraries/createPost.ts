@@ -1,7 +1,7 @@
 import { API_URL } from "../api/api";
 
 export const createPost = async (title: string) => {
-  const response = await fetch(`${API_URL}/api/v1/post`, {
+  const response = await fetch(`${API_URL}/api/v1/posts`, {
     method: "POST",
     body: JSON.stringify({
       title,

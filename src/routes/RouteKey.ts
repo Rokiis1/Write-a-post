@@ -1,4 +1,4 @@
 export enum RouteKey {
   Index = "/",
-  Post = "/post/:deckId",
+  Post = "/post/:postId",
 }
