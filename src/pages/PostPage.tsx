@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useGetPost from "../hooks/useGetPost";
+import { Post } from "../interfaces/Post";
 import createPostCard from "../middleware/libraries/createPostCard";
+import deletePostCard from "../middleware/libraries/deletePostCard";
+import getPost from "../middleware/libraries/getPost";
 
 const PostCard = () => {
+  const [post, setPost] = useState<Post | undefined>();
+  const [cards, setCards] = useState<string[]>([]);
   const [text, setText] = useState("");
-  const [fetchState, post, cards, setCards, setPost, getOnePost] = useGetPost();
   const { postId } = useParams();
 
   async function handleCreateDeck(e: React.FormEvent) {
@@ -15,16 +19,28 @@ const PostCard = () => {
     setText("");
   }
 
-  // useEffect(() => {
-  //   if (!postId) return;
-  //   const newCard = getOnePost(postId);
-  //   setPost(newCard);
-  //   setCards(newCard.cards);
-  // }, [postId]);
+  async function handleDeleteCard(cardId: number) {
+    if (!postId) return;
+    const newDeck = await deletePostCard(postId, cardId);
+    setCards(newDeck.cards);
+  }
+
+  useEffect(() => {
+    async function fetchPost() {
+      if (!postId) return;
+      const newPost = await getPost(postId);
+      setPost(newPost);
+      setCards(newPost.cards);
+    }
+    fetchPost();
+  }, [postId]);
+
+  console.log(cards);
+  console.log(post);
 
   return (
     <div>
-      <div>Testing</div>
+      <h1>{post?.title}</h1>
       <form onSubmit={handleCreateDeck}>
         <label htmlFor="card-text">Card Text</label>
         <input
